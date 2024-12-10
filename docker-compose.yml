@@ -1,31 +1,4 @@
 services:
-  articles_service:
-    build:
-      context: ./events_service
-      dockerfile: Dockerfile
-    ports:
-      - "${EVENTS_SERVICE_PORT}:8001"
-    depends_on:
-      - db
-      - search_service
-    env_file:
-      - .env
-    networks:
-      - backend
-
-  search_service:
-    build:
-      context: ./search_service
-      dockerfile: Dockerfile
-    ports:
-      - "${SEARCH_SERVICE_PORT}:8002"
-    depends_on:
-      - elasticsearch
-    env_file:
-      - .env
-    networks:
-      - backend
-
   db:
     image: postgres:15
     environment:
