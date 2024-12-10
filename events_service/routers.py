@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
-from schema import EventCreate, EventUpdate, EventResponse
+from schema import EventCreate, EventUpdate, EventResponse, EventStatus
 from model import Event
 from session import SessionLocal
 
@@ -40,11 +40,15 @@ def update_event(event_id: int, event: EventUpdate, db: Session = Depends(get_db
     db_event = db.query(Event).filter(Event.id == event_id).first()
     if not db_event:
         raise NOT_FOUND
-    for key, value in event.dict(exclude_unset=True).items():
+    for key, value in event.model_dump(exclude_unset=True).items():
+        if key == "status" and isinstance(value, EventStatus):
+            value = value.value.upper()
         setattr(db_event, key, value)
     db.commit()
     db.refresh(db_event)
     return db_event
+
+
 
 @router.delete("/{event_id}", status_code=204)
 def delete_event(event_id: int, db: Session = Depends(get_db)):
