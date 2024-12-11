@@ -10,14 +10,16 @@ services:
     networks:
       - backend
 
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.16.1
-    environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false  # Deshabilita la seguridad
-      - xpack.security.transport.ssl.enabled=false  # Deshabilita SSL
+  events_service:
+    build:
+      context: ./events_service
+      dockerfile: Dockerfile
     ports:
-      - "9200:9200"
+      - "${ARTICLES_SERVICE_PORT}:8001"
+    depends_on:
+      - db
+    env_file:
+      - .env
     networks:
       - backend
 
