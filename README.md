@@ -16,7 +16,7 @@
 
 [Postman Collection](https://raw.githubusercontent.com/juanpfrancos/events-architecture/refs/heads/main/docs/Event%20Management%20Service.postman_collection.json)
 
-## Microservicio de Gestión de Eventos (CRUD)
+## Microservicio de Notificaciones
 
 [Postman Collection](https://raw.githubusercontent.com/juanpfrancos/events-architecture/refs/heads/main/docs/Message%20Notification%20Service.postman_collection.json)
 
