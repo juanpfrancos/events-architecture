@@ -7,7 +7,12 @@
 
 ![Diagrama](https://raw.githubusercontent.com/juanpfrancos/events-architecture/refs/heads/main/docs/Diagram.webp)
 
-## Microservicio de Gestión de Eventos
+## Microservicio de registro y autenticación
+
+[Postman Collection](https://raw.githubusercontent.com/juanpfrancos/events-architecture/refs/heads/main/docs/Authorization%20Service.postman_collection.json)
+
+
+## Microservicio de Gestión de Eventos (CRUD)
 
 [Postman Collection](https://raw.githubusercontent.com/juanpfrancos/events-architecture/refs/heads/main/docs/Event%20Management%20Service.postman_collection.json)
 
