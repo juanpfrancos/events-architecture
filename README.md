@@ -39,11 +39,6 @@
    ```bash
    alembic upgrade head
    
-   from model import Base 
-   target_metadata = Base.metadata
-   
-   sqlalchemy.url = postgresql+psycopg2://testuser:P4ssw0rd1234@localhost:5433/events_db
-   
    ```
 
 ---
