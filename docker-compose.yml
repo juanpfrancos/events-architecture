@@ -9,15 +9,22 @@ services:
       - "${POSTGRES_PORT}:5432"
     networks:
       - backend
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   events_service:
     build:
       context: ./events_service
       dockerfile: Dockerfile
     ports:
-      - "${ARTICLES_SERVICE_PORT}:8001"
+      - "${ARTICLES_SERVICE_PORT}:8008"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     env_file:
       - .env
     networks:
