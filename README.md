@@ -1,7 +1,13 @@
 # events-architecture
-**Microservicio de Gestión de Eventos**
----
 
+
+
+
+## Arquitectura
+
+![Diagrama](https://raw.githubusercontent.com/juanpfrancos/events-architecture/refs/heads/main/docs/Diagram.webp)
+
+## Microservicio de Gestión de Eventos
 
 ## Migraciones con Alembic
 
