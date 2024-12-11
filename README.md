@@ -9,6 +9,8 @@
 
 ## Microservicio de Gestión de Eventos
 
+[Postman Collection](https://raw.githubusercontent.com/juanpfrancos/events-architecture/refs/heads/main/docs/Event%20Management%20Service.postman_collection.json)
+
 ## Build microservicios
 
 1. Inicializar :
