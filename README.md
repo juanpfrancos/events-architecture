@@ -9,14 +9,9 @@
 
 ## Microservicio de Gestión de Eventos
 
-## Migraciones con Alembic
+## Build microservicios
 
 1. Inicializar :
-   ```
-    sudo docker-compose up --build
-   ```
-
-2. Hacer build:
    ```
     sudo docker-compose up --build
    ```
