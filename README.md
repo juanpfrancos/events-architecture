@@ -78,6 +78,84 @@ Mientras los microservicios están revantados se puede acceder a la documentaci�
 
 [Postman Collection](https://raw.githubusercontent.com/juanpfrancos/events-architecture/refs/heads/main/docs/Message%20Notification%20Service.postman_collection.json)
 
+### **API Gateway**
+
+#### **Probar las operaciones GraphQL**
+Se puede ingresar al playgraund de Graphql y Strawberry desde el navegador en `http://localhost:8005/graphql`. Y realizar las consultas y mutaciones. 
+##### **Query: Obtener todos los eventos**
+```graphql
+query {
+  events {
+    id
+    title
+    location
+    start_time
+    end_time
+  }
+}
+```
+
+##### **Query: Buscar evento por ID**
+```graphql
+query {
+  event(eventId: 1) {
+    title
+    description
+    location
+  }
+}
+```
+
+##### **Query: Búsqueda full-text**
+```graphql
+query {
+  fullTextSearch(query: "conference") {
+    id
+    title
+    description
+  }
+}
+```
+
+##### **Mutation: Crear un evento**
+```graphql
+mutation {
+  createEvent(
+    title: "Nuevo evento"
+    description: "Detalle del evento"
+    location: "Online"
+    startTime: "2024-12-20T10:00:00"
+    endTime: "2024-12-20T12:00:00"
+    capacity: 100
+  ) {
+    id
+    title
+    status
+  }
+}
+```
+
+##### **Mutation: Enviar una notificación**
+```graphql
+mutation {
+  sendNotification(phone: "3166234530", message: "Recordatorio de evento") 
+}
+```
+
+---
+
+### **Documentación de parámetros**
+
+| **Operación**         | **Tipo**  | **Parámetro**           | **Tipo de Dato** | **Descripción**                                   |
+|-----------------------|-----------|-------------------------|------------------|--------------------------------------------------|
+| `events`             | Query     | -                       | -                | Devuelve todos los eventos disponibles.          |
+| `event`              | Query     | `eventId`               | `int`            | ID del evento que se desea obtener.             |
+| `fullTextSearch`     | Query     | `query`                 | `str`            | Texto a buscar en los eventos.                  |
+| `createEvent`        | Mutation  | `title`, `description`, `location`, `startTime`, `endTime`, `capacity` | Varios | Crea un nuevo evento con la información proporcionada. |
+| `updateEvent`        | Mutation  | `eventId`, `title`, `description`, `location`, `startTime`, `endTime`, `capacity`, `status` | Varios | Actualiza un evento existente.                  |
+| `deleteEvent`        | Mutation  | `eventId`               | `int`            | Elimina un evento por su ID.                    |
+| `sendNotification`   | Mutation  | `phone`, `message`      | `str`, `str`     | Envía una notificación a un número de teléfono. |
+
 
 # Documentación Elasticsearch 
 
@@ -93,17 +171,6 @@ El índice se crea con los siguientes parámetros:
 
 ```json
 {
-  "settings": {
-    "number_of_shards": 1,
-    "number_of_replicas": 1,
-    "analysis": {
-      "analyzer": {
-        "default": {
-          "type": "standard"
-        }
-      }
-    }
-  },
   "mappings": {
     "properties": {
       "title": {
