@@ -262,3 +262,30 @@ Si desea tener mayor control de las búsquedas, ejecutar casos de prueba puede h
 
 ```
 
+## Migraciones con Alembic
+También se realizaron migraciones con Alembic en los microservicios `events_service` y `auth_service` Siguiento los pasos:
+
+1. **Inicializar Alembic**:
+
+```
+    alembic init migrations
+```
+
+2. Configura el archivo con la cadena de conexión a DB `alembic.ini`:
+
+```
+    sqlalchemy.url = postgresql://user:password@localhost:5432/event_db
+```
+
+3. Genera una migración:
+```
+    alembic revision --autogenerate -m "Migration description"
+```
+
+
+4. Aplica la migración:
+```
+    alembic upgrade head
+```
+  
+Si se van a realizar cambios en el modelo, después de realizar los cambios solo es necesario ejecutar el paso `3` y `4`. Con esto quedará lista la nueva migración
