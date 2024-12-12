@@ -74,19 +74,6 @@ services:
       timeout: 10s
       retries: 5
 
-  kibana:
-    image: docker.elastic.co/kibana/kibana:8.10.1
-    ports:
-      - "5601:5601"
-    depends_on:
-      elasticsearch:
-        condition: service_healthy
-    environment:
-      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-    networks:
-      - backend
-    restart: unless-stopped
-
   create_index:
       build:
         context: ./events_service
