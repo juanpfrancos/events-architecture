@@ -4,7 +4,10 @@ from message import send_message
 
 router = APIRouter()
 
-# Endpoint to receive phone number and message
+
+"""
+Endpoint to receive whatsapp number and message to send
+"""
 @router.post("/send_message/")
 async def send_message_endpoint(request: MessageRequest):
     try:

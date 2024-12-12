@@ -12,7 +12,9 @@ AUTH_HEADER = {
 
 URL = f"https://graph.facebook.com/v20.0/{os.getenv('BUSINESS_ID')}/messages"
 
-
+"""
+Function to send a message to a whatsapp number
+"""
 def send_message(phone, message_text):
     message = {
         "messaging_product": "whatsapp",

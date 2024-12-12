@@ -7,8 +7,14 @@ from session import SessionLocal
 from elasticsearch import Elasticsearch
 from fastapi import APIRouter, Query
 from typing import List
+from dotenv import load_dotenv
+import os
 
-es_client = Elasticsearch("http://elasticsearch:9200")
+
+load_dotenv()
+
+
+ES_CLIENT = Elasticsearch(os.getenv("ELASTICSEARCH_HOST"))
 
 router = APIRouter()
 
@@ -21,6 +27,9 @@ def get_db():
     finally:
         db.close()
 
+"""
+CRUD operations for events endpoints
+"""
 @router.post("/", response_model=EventResponse)
 def create_event(event: EventCreate, db: Session = Depends(get_db)):
     new_event = Event(**event.dict())
@@ -30,7 +39,7 @@ def create_event(event: EventCreate, db: Session = Depends(get_db)):
 
     event_dict = event.dict()
     event_dict["id"] = new_event.id
-    es_client.index(index="events", id=new_event.id, document=event_dict)
+    ES_CLIENT.index(index="events", id=new_event.id, document=event_dict)
     return new_event
 
 @router.get("/", response_model=List[EventResponse])
@@ -56,10 +65,8 @@ def update_event(event_id: int, event: EventUpdate, db: Session = Depends(get_db
     db.commit()
     db.refresh(db_event)
 
-    es_client.update(index="events", id=event_id, doc=event.dict(exclude_unset=True))
+    ES_CLIENT.update(index="events", id=event_id, doc=event.dict(exclude_unset=True))
     return db_event
-
-
 
 @router.delete("/{event_id}", status_code=204)
 def delete_event(event_id: int, db: Session = Depends(get_db)):
@@ -69,10 +76,15 @@ def delete_event(event_id: int, db: Session = Depends(get_db)):
     db.delete(db_event)
     db.commit()
 
-    es_client.delete(index="events", id=event_id, ignore=[404])
+    ES_CLIENT.delete(index="events", id=event_id, ignore=[404])
     return None
 
 
+"""
+Full-text search endpoint
+You can search for events by title, description, or location, also you can search for partial words
+and personalize the fields you want to search for.
+"""
 @router.get("/search/full-text")
 async def full_text_search(query: str = Query(..., min_length=3)):
     search_body = {
@@ -83,5 +95,5 @@ async def full_text_search(query: str = Query(..., min_length=3)):
             }
         }
     }
-    result = es_client.search(index="events", body=search_body)
+    result = ES_CLIENT.search(index="events", body=search_body)
     return result['hits']['hits']

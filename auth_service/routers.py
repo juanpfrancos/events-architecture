@@ -7,6 +7,10 @@ from auth import authenticate_user, create_access_token
 
 router = APIRouter()
 
+"""
+Register and login endpoints
+"""
+
 @router.post("/register", response_model=UserResponse)
 def register(user: UserCreate, db: Session = Depends(get_db)):
     db_user = create_user(db, user)
