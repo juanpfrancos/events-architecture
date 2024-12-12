@@ -4,6 +4,9 @@ from typing import List
 from schema import EventCreate, EventUpdate, EventResponse, EventStatus
 from model import Event
 from session import SessionLocal
+from elasticsearch import Elasticsearch
+
+es_client = Elasticsearch("http://elasticsearch:9200")
 
 router = APIRouter()
 
@@ -22,6 +25,10 @@ def create_event(event: EventCreate, db: Session = Depends(get_db)):
     db.add(new_event)
     db.commit()
     db.refresh(new_event)
+
+    event_dict = event.dict()
+    event_dict["id"] = new_event.id
+    es_client.index(index="events", id=new_event.id, document=event_dict)
     return new_event
 
 @router.get("/", response_model=List[EventResponse])
@@ -46,6 +53,8 @@ def update_event(event_id: int, event: EventUpdate, db: Session = Depends(get_db
         setattr(db_event, key, value)
     db.commit()
     db.refresh(db_event)
+
+    es_client.update(index="events", id=event_id, doc=event.dict(exclude_unset=True))
     return db_event
 
 
@@ -57,4 +66,6 @@ def delete_event(event_id: int, db: Session = Depends(get_db)):
         raise NOT_FOUND
     db.delete(db_event)
     db.commit()
+
+    es_client.delete(index="events", id=event_id, ignore=[404])
     return None
