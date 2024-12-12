@@ -51,7 +51,7 @@ Mientras los microservicios están revantados se puede acceder a la documentaci�
 
 ## Microservicio de registro y autenticación
 
-[Documentación Markdown](https://raw.githubusercontent.com/juanpfrancos/events-architecture/refs/heads/main/docs/auth.md)
+[Documentación Markdown](https://github.com/juanpfrancos/events-architecture/blob/main/docs/auth.md)
 
 [Redoc](http://localhost:8009/redoc)
 
@@ -61,7 +61,7 @@ Mientras los microservicios están revantados se puede acceder a la documentaci�
 
 
 ## Microservicio de Gestión de Eventos (CRUD)
-[Documentación Markdown](https://raw.githubusercontent.com/juanpfrancos/events-architecture/refs/heads/main/docs/crud.md)
+[Documentación Markdown](https://github.com/juanpfrancos/events-architecture/blob/main/docs/crud.md)
 
 [Redoc](http://localhost:8008/redoc)
 
@@ -70,7 +70,7 @@ Mientras los microservicios están revantados se puede acceder a la documentaci�
 [Postman Collection](https://raw.githubusercontent.com/juanpfrancos/events-architecture/refs/heads/main/docs/Event%20Management%20Service.postman_collection.json)
 
 ## Microservicio de Notificaciones
-[Documentación Markdown](https://raw.githubusercontent.com/juanpfrancos/events-architecture/refs/heads/main/docs/messages.md)
+[Documentación Markdown](https://github.com/juanpfrancos/events-architecture/blob/main/docs/messages.md)
 
 [Redoc](http://localhost:8007/redoc)
 
