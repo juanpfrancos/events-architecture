@@ -5,6 +5,8 @@ from schema import EventCreate, EventUpdate, EventResponse, EventStatus
 from model import Event
 from session import SessionLocal
 from elasticsearch import Elasticsearch
+from fastapi import APIRouter, Query
+from typing import List
 
 es_client = Elasticsearch("http://elasticsearch:9200")
 
@@ -69,3 +71,17 @@ def delete_event(event_id: int, db: Session = Depends(get_db)):
 
     es_client.delete(index="events", id=event_id, ignore=[404])
     return None
+
+
+@router.get("/search/full-text")
+async def full_text_search(query: str = Query(..., min_length=3)):
+    search_body = {
+        "query": {
+            "multi_match": {
+                "query": query,
+                "fields": ["title", "description", "location"]
+            }
+        }
+    }
+    result = es_client.search(index="events", body=search_body)
+    return result['hits']['hits']
