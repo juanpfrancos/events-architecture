@@ -16,6 +16,7 @@ python-dotenv = "^1.0.1"
 alembic = "^1.14.0"
 pydantic-settings = "^2.6.1"
 logging = "^0.4.9.6"
+elasticsearch = "^8.16.0"
 
 
 [build-system]
