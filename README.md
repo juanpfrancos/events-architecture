@@ -1,4 +1,39 @@
-# events-architecture
+# Events App
+
+
+## Preparar entorno
+
+1. Clonar repositorio :
+   ```
+   git clone https://github.com/juanpfrancos/events-architecture.git
+   ```
+2. Agregar variables de entorno :
+   Se debe crear un archivo .env en el directorio raíz y pegar dentro de él las variables de entorno adjuntas en el email.   
+   
+   ### Estructura directorio
+   ![Estructura](https://raw.githubusercontent.com/juanpfrancos/events-architecture/refs/heads/main/docs//Structure.PNG)
+
+---
+## Build microservicios
+
+1. Inicializar :
+   ```
+    sudo docker-compose up --build
+   ```
+---
+
+## Generar eventos con data de prueba
+
+1. Generar eventos :
+   
+   [generate_events.py](https://github.com/juanpfrancos/events-architecture/blob/main/docs/generate_events.py)
+
+2. Sincronizar data existente :
+   
+   [sync_data.py](https://github.com/juanpfrancos/events-architecture/blob/main/docs/sync_data.py)
+
+---
+
 
 
 
@@ -20,37 +55,3 @@
 
 [Postman Collection](https://raw.githubusercontent.com/juanpfrancos/events-architecture/refs/heads/main/docs/Message%20Notification%20Service.postman_collection.json)
 
-
-## Build microservicios
-
-1. Inicializar :
-   ```
-    sudo docker-compose up --build
-   ```
----
-
-## Migraciones con Alembic
-
-1. **Inicializar Alembic**:
-   ```bash
-   alembic init migrations
-
-   ```
-
-2. Configura el archivo `alembic.ini`:
-   ```ini
-   sqlalchemy.url = postgresql://user:password@localhost:5432/event_db
-   ```
-
-3. Genera una migración:
-   ```bash
-   alembic revision --autogenerate -m "Create events table"
-   ```
-
-4. Aplica la migración:
-   ```bash
-   alembic upgrade head
-   
-   ```
-
----
