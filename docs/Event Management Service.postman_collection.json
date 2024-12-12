@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "a15cc15c-e139-4df4-b9a4-c868e86e9586",
+		"_postman_id": "0710539d-3702-4fa3-acfe-bb0639b0439f",
 		"name": "Event Management Service",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "26124854",
-		"_collection_link": "https://gold-resonance-35443.postman.co/workspace/Auth-FastAPI~e9bf8828-bc32-412b-873b-517664faa720/collection/26124854-a15cc15c-e139-4df4-b9a4-c868e86e9586?action=share&source=collection_link&creator=26124854"
+		"_collection_link": "https://gold-resonance-35443.postman.co/workspace/Auth-FastAPI~e9bf8828-bc32-412b-873b-517664faa720/collection/26124854-0710539d-3702-4fa3-acfe-bb0639b0439f?action=share&source=collection_link&creator=26124854"
 	},
 	"item": [
 		{
@@ -535,6 +535,118 @@
 									"path": [
 										"events",
 										""
+									]
+								}
+							},
+							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Full Text Search",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/events/search/full-text?query=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events",
+								"search",
+								"full-text"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "<string>",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/events/search/full-text?query=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										"search",
+										"full-text"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						},
+						{
+							"name": "Validation Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/events/search/full-text?query=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										"search",
+										"full-text"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "<string>"
+										}
 									]
 								}
 							},
